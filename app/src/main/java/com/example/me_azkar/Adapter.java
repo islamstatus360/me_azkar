@@ -42,7 +42,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
 
     @Override
     public void onBindViewHolder( final Adapter.viewHolder holder, final int position) {
-        holder.supplication_repeat.setText("Repeat: " + arrayList.get(position).getSupplication_repeat() + " time[s]");
+        holder.supplication_repeat.setText("Recite: " + arrayList.get(position).getSupplication_repeat() + " time[s]");
         holder.supplication_important_info.setText(arrayList.get(position).getSupplication_important_info());
         holder.supplication.setText(arrayList.get(position).getSupplication());
         holder.supplication_translation.setText(arrayList.get(position).getSupplication_urdu_translation());
@@ -100,7 +100,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
 
     public String getDisplayData() {
         String data = "" +
-                "Repeat " + arrayList.get(position).getSupplication_repeat() + " time[s]" +
+                "Recite " + arrayList.get(position).getSupplication_repeat() + " time[s]" +
                 "\n\n" +
                 arrayList.get(position).getSupplication_important_info() +
                 "\n\n" +

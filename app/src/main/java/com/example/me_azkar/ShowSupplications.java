@@ -33,7 +33,6 @@ public class ShowSupplications extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         databaseHelper = new DatabaseHelper(this);
-
         displayRow();
     }
 

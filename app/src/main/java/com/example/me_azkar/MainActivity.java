@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         databaseHelper = new DatabaseHelper(this);
+        databaseHelper.openDataBase();
+        databaseHelper.refresh();
+        databaseHelper.recreate();
+
 
         btnMorning = findViewById(R.id.btnMorning);
         btnEvening = findViewById(R.id.btnEvening);

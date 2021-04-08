@@ -5,46 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_main_scene"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/main_screen_background" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnMorning"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="232dp"
-        android:layout_marginEnd="53dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="MORNING"
-        android:textColor="@color/colorWhite"
-        android:textColorLink="@color/colorWhite"
-        android:textSize="36sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="2dp"
+            >
 
-    <Button
-        android:id="@+id/btnEvening"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/btnMorning"
-        android:layout_alignStart="@+id/btnMorning"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="-5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="46dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="EVENING"
-        android:textColor="@color/colorWhite"
-        android:textColorLink="@color/colorWhite"
-        android:textSize="36sp" />
+            <Button
+                android:id="@+id/btnMorning"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_corner"
+                android:layout_margin="5dp"
+                android:text="Morning"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp" />
 
+            <Button
+                android:id="@+id/btnEvening"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner"
+                android:text="Evening"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Switch
+            android:id="@+id/switchLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="English"
+            />
+    </LinearLayout>
 
 </RelativeLayout>

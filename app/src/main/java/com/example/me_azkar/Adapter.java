@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -26,6 +27,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
     ArrayList<Model> arrayList;
     DatabaseHelper databaseHelper;
     final int position = 0;
+
+    Boolean language = MainActivity.getLanguage();
 
     public Adapter(Context context, Activity activity, ArrayList<Model> arrayList) {
         this.context = context;
@@ -42,25 +45,42 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
 
     @Override
     public void onBindViewHolder( final Adapter.viewHolder holder, final int position) {
+        holder.supplication_id.setText(arrayList.get(position).getSupplication_id());
         holder.supplication_repeat.setText("Recite: " + arrayList.get(position).getSupplication_repeat() + " time[s]");
         holder.supplication_important_info.setText(arrayList.get(position).getSupplication_important_info());
         holder.supplication.setText(arrayList.get(position).getSupplication());
-        holder.supplication_translation.setText(arrayList.get(position).getSupplication_urdu_translation());
+        if (language) {
+            holder.supplication_translation.setText(arrayList.get(position).getSupplication_english_translation());
+        }
+        else {
+            holder.supplication_translation.setText(arrayList.get(position).getSupplication_urdu_translation());
+        }
         holder.supplication_detail.setText(arrayList.get(position).getSupplication_detail());
         holder.supplication_reference_no.setText(arrayList.get(position).getSupplication_reference_no());
 
         holder.shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareIntent(position);
+                try {
+                    shareIntent(position);
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(context, "Error: this feature is not supported in your mobile", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         holder.waShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                whatsappShareIntent(position);
+                try {
+                    whatsappShareIntent(position);
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(context, "Error: this feature is not supported in your mobile", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -72,9 +92,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
                 clipboard.setPrimaryClip(clip);
             }
         });
-
         databaseHelper = new DatabaseHelper(context);
-
     }
 
     @Override
@@ -84,6 +102,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
 
     public void shareIntent(final int position) {
         Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "ME AZKAR");
         intent.putExtra(Intent.EXTRA_TEXT, getDisplayData());
         intent.setType("text/plain");
         context.startActivity(Intent.createChooser(intent, "Share To"));
@@ -95,13 +114,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
         intent.setType("text/plain");
         intent.setPackage("com.whatsapp");
         context.startActivity(Intent.createChooser(intent, "Share To ..."));
-
     }
 
     public String getDisplayData() {
         String data = "" +
-                "Recite " + arrayList.get(position).getSupplication_repeat() + " time[s]" +
-                "\n\n" +
+                "Supplication ID: "+arrayList.get(position).getSupplication_id()+" | \n\n Recite " + arrayList.get(position).getSupplication_repeat() + " time[s]" +
+                "\n" +
                 arrayList.get(position).getSupplication_important_info() +
                 "\n\n" +
                 arrayList.get(position).getSupplication() +
@@ -121,13 +139,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
 
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        TextView supplication_repeat, supplication_important_info, supplication, supplication_translation, supplication_detail, supplication_reference_no;
+        TextView supplication_id, supplication_repeat, supplication_important_info, supplication, supplication_translation, supplication_detail, supplication_reference_no;
         Button shareButton, waShareButton, copyButton;
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-
+            supplication_id = itemView.findViewById(R.id.supplication_id);
             supplication_repeat = itemView.findViewById(R.id.supplication_repeat_no);
             supplication_important_info = itemView.findViewById(R.id.supplication_important_info);
             supplication = itemView.findViewById(R.id.supplication);

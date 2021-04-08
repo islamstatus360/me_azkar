@@ -137,9 +137,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "WHERE sme." +data+ " = 1", null);
 
         if(cursor.moveToFirst()) {
+            int i = 1;
             do {
                 Model model = new Model();
-                model.setSupplication_id(cursor.getString(0));
+                model.setSupplication_id(String.valueOf(i));
                 model.setSupplication_repeat(cursor.getString(1));
                 model.setSupplication_important_info(cursor.getString(2));
                 model.setSupplication(cursor.getString(3));
@@ -148,6 +149,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 model.setSupplication_detail(cursor.getString(6));
                 model.setSupplication_reference_no(cursor.getString(7));
                 arrayList.add(model);
+                i = i+1 ;
             }while(cursor.moveToNext());
         }
         return arrayList;

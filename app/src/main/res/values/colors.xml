@@ -7,4 +7,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorRed">#CA2929</color>
 
+
+    <color name="colorButton">#206a5d</color>
+
 </resources>

@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // Save State in Shared Preferences
         SharedPreferences sharedPreferences = getSharedPreferences("save", MODE_PRIVATE);
         aSwitch.setChecked(sharedPreferences.getBoolean("value", false));
-        setLanguage(false);
-
+        setLanguage(true);
         try {
             aSwitch.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -50,12 +50,13 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         >
+
         <Switch
             android:id="@+id/switchLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="English"
-            />
+            android:checked="false"
+            android:text="English" />
     </LinearLayout>
 
 </RelativeLayout>

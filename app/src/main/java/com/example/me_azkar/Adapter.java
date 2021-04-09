@@ -47,15 +47,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
     public void onBindViewHolder( final Adapter.viewHolder holder, final int position) {
         holder.supplication_id.setText(arrayList.get(position).getSupplication_id());
         holder.supplication_repeat.setText("Recite: " + arrayList.get(position).getSupplication_repeat() + " time[s]");
-        holder.supplication_important_info.setText(arrayList.get(position).getSupplication_important_info());
         holder.supplication.setText(arrayList.get(position).getSupplication());
         if (language) {
-            holder.supplication_translation.setText(arrayList.get(position).getSupplication_english_translation());
+            holder.supplication_translation.setText(arrayList.get(position).getSupplication_translation_en());
+            holder.supplication_important_info.setText(arrayList.get(position).getSupplication_important_info_en());
+            holder.supplication_detail.setText(arrayList.get(position).getSupplication_detail_en());
         }
         else {
-            holder.supplication_translation.setText(arrayList.get(position).getSupplication_urdu_translation());
+            holder.supplication_translation.setText(arrayList.get(position).getSupplication_translation_ur());
+            holder.supplication_important_info.setText(arrayList.get(position).getSupplication_important_info_ur());
+            holder.supplication_detail.setText(arrayList.get(position).getSupplication_detail_ur());
         }
-        holder.supplication_detail.setText(arrayList.get(position).getSupplication_detail());
         holder.supplication_reference_no.setText(arrayList.get(position).getSupplication_reference_no());
 
         holder.shareButton.setOnClickListener(new View.OnClickListener() {
@@ -117,24 +119,42 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
     }
 
     public String getDisplayData() {
-        String data = "" +
-                "Supplication ID: "+arrayList.get(position).getSupplication_id()+" | \n\n Recite " + arrayList.get(position).getSupplication_repeat() + " time[s]" +
-                "\n" +
-                arrayList.get(position).getSupplication_important_info() +
-                "\n\n" +
-                arrayList.get(position).getSupplication() +
-                "\n\n" +
-                arrayList.get(position).getSupplication_urdu_translation() +
-                "\n\n" +
-                arrayList.get(position).getSupplication_english_translation() +
-                "\n\n" +
-                arrayList.get(position).getSupplication_detail() +
-                "\n\n" +
-                arrayList.get(position).getSupplication_reference_no() +
-                "\n\n" +
-                "https://instagram.com/islamstatus360" +
-                "";
-        return data;
+        if(language) {
+            String data = "" +
+                    "Supplication ID: "+arrayList.get(position).getSupplication_id()+" | Recite " + arrayList.get(position).getSupplication_repeat() + " time[s]" +
+                    "\n" +
+                    arrayList.get(position).getSupplication_important_info_en() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication_translation_en() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication_detail_en() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication_reference_no() +
+                    "\n\n" +
+                    "https://instagram.com/islamstatus360" +
+                    "";
+            return data;
+        }
+        else {
+            String data = "" +
+                    "Supplication ID: "+arrayList.get(position).getSupplication_id()+" | Recite " + arrayList.get(position).getSupplication_repeat() + " time[s]" +
+                    "\n" +
+                    arrayList.get(position).getSupplication_important_info_ur() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication_translation_ur() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication_detail_ur() +
+                    "\n\n" +
+                    arrayList.get(position).getSupplication_reference_no() +
+                    "\n\n" +
+                    "https://instagram.com/islamstatus360" +
+                    "";
+            return data;
+        }
     }
 
 
@@ -157,10 +177,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
             waShareButton = itemView.findViewById(R.id.whatsappButton);
             copyButton = itemView.findViewById(R.id.copyButton);
 
-
-            Typeface typeface = itemView.getResources().getFont(R.font.jameel_noori_nastaleeq_regular);
-            supplication_translation.setTypeface(typeface);
-            //verseTranslation.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
+            if(language) {
+                supplication_translation.setTypeface(Typeface.DEFAULT);
+                supplication_important_info.setTypeface(Typeface.DEFAULT);
+            }
+            else {
+                Typeface typeface = itemView.getResources().getFont(R.font.jameel_noori_nastaleeq_regular);
+                supplication_translation.setTypeface(typeface);
+                supplication_important_info.setTypeface(typeface);
+                //verseTranslation.setTextDirection(View.TEXT_DIRECTION_FIRST_STRONG_LTR);
+            }
         }
     }
 }

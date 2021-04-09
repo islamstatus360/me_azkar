@@ -20,6 +20,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     String data = MainActivity.getSupplication();
+    Boolean language = MainActivity.getLanguage();
+    String book_name_language = "";
+    String hadith_no_language = "";
 
     // declare varible and store database basic information
     public static final String DATABASE_NAME =  "morning_evening_supplications_data.db";
@@ -28,32 +31,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SUPPLICATION_TABLE_NAME = "supplication_detail";
     public static final String SUPPLICATION_MORNING_EVENING_TABLE_NAME = "supplication_morning_evening";
     public static final String SUPPLICATION_REFERENCE_TABLE_NAME = "supplication_reference";
-
-    // SUPPLICATION TABLE COLUMNS NAMES
-    public static final String SUPPLIICATION_COLUMN_0 = "supplication_id";
-    public static final String SUPPLIICATION_COLUMN_1 = "supplication_repeat_no";
-    public static final String SUPPLIICATION_COLUMN_2 = "supplication_important_info";
-    public static final String SUPPLIICATION_COLUMN_3 = "supplication";
-    public static final String SUPPLIICATION_COLUMN_4 = "supplication_urdu_translation";
-    public static final String SUPPLIICATION_COLUMN_5 = "supplication_english_translation";
-    public static final String SUPPLIICATION_COLUMN_6 = "supplication_detail";
-    public static final String SUPPLIICATION_COLUMN_7 = "supplication_.commorning_evening_id";
-    public static final String SUPPLIICATION_COLUMN_8 = "supplication_reference_id";
-
-    // SUPPLICATION MORNING EVENING TABLE COLUMNS NAMES
-    public static final String SUPPLICATION_MORNING_EVENING_COLUMN_0 = "supplication_morning_evening_id";
-    public static final String SUPPLICATION_MORNING_EVENING_COLUMN_1 = "supplication_morning";
-    public static final String SUPPLICATION_MORNING_EVENING_COLUMN_2 = "supplication_evening";
-    public static final String SUPPLICATION_MORNING_EVENING_COLUMN_3 = "supplication_id";
-
-
-    // SUPPLICATION REFERENCE TABLE COLUMNS NAMES
-    public static final String SUPPLICATION_REFERENCE_COLUMN_0 = "supplication_reference_id";
-    public static final String SUPPLICATION_REFERENCE_COLUMN_1 = "supplication_book_name_1";
-    public static final String SUPPLICATION_REFERENCE_COLUMN_2 = "supplication_hadith_no_1";
-    public static final String SUPPLICATION_REFERENCE_COLUMN_3 = "supplication_book_name_2";
-    public static final String SUPPLICATION_REFERENCE_COLUMN_4 = "supplication_hadith_no_2";
-    public static final String SUPPLICATION_REFERENCE_COLUMN_5 = "supplication_id";
 
     static Context context;
     private static DatabaseHelper instance;
@@ -129,28 +106,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<Model> arrayList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT sd.supplication_id, sd.supplication_repeat_no, sd.supplication_important_info, sd.supplication, sd.supplication_urdu_translation, sd.supplication_english_translation, sd.supplication_detail, sr.supplication_book_name_1 || \"، \" || sr.supplication_hadith_no_1 AS supplication_references FROM supplication_detail AS sd \n" +
-                "JOIN supplication_morning_evening AS sme \n" +
+        if (language) {
+            book_name_language = "sr.supplication_book_name_en";
+            hadith_no_language = "sr.supplication_hadith_no_en";
+
+        } else {
+            book_name_language = "sr.supplication_book_name_ur";
+            hadith_no_language = "sr.supplication_hadith_no_ur";
+        }
+
+        Cursor cursor = db.rawQuery("SELECT sd.supplication_id, sd.supplication_repeat_no, sd.supplication_important_info_ur, sd.supplication_important_info_en , sd.supplication, sd.supplication_translation_ur, sd.supplication_translation_en , sd.supplication_detail_ur, sd.supplication_detail_en , "+book_name_language+" || \" , \" || "+hadith_no_language+" AS REFERENCES_ID FROM supplication_detail AS sd\n" +
+                "JOIN supplication_morning_evening AS sme\n" +
                 "ON sd.supplication_morning_evening_id = sme.supplication_morning_evening_id\n" +
                 "JOIN supplication_reference as sr\n" +
                 "ON sd.supplication_reference_id = sr.supplication_reference_id\n" +
-                "WHERE sme." +data+ " = 1", null);
+                "WHERE sme." + data + " = 1", null);
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             int i = 1;
             do {
                 Model model = new Model();
                 model.setSupplication_id(String.valueOf(i));
                 model.setSupplication_repeat(cursor.getString(1));
-                model.setSupplication_important_info(cursor.getString(2));
-                model.setSupplication(cursor.getString(3));
-                model.setSupplication_urdu_translation(cursor.getString(4));
-                model.setSupplication_english_translation(cursor.getString(5));
-                model.setSupplication_detail(cursor.getString(6));
-                model.setSupplication_reference_no(cursor.getString(7));
+                model.setSupplication_important_info_ur(cursor.getString(2));
+                model.setSupplication_important_info_en(cursor.getString(3));
+                model.setSupplication(cursor.getString(4));
+                model.setSupplication_translation_ur(cursor.getString(5));
+                model.setSupplication_translation_en(cursor.getString(6));
+                model.setSupplication_detail_ur(cursor.getString(7));
+                model.setSupplication_detail_en(cursor.getString(8));
+                model.setSupplication_reference_no(cursor.getString(9));
                 arrayList.add(model);
-                i = i+1 ;
-            }while(cursor.moveToNext());
+                i = i + 1;
+            } while (cursor.moveToNext());
         }
         return arrayList;
     }

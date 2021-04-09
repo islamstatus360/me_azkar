@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     // object's database helper class
     DatabaseHelper databaseHelper;
     Switch aSwitch;
-
+    Context context;
     private static String supplication;
     private static Boolean language;
 
@@ -55,10 +56,12 @@ public class MainActivity extends AppCompatActivity {
         aSwitch = findViewById(R.id.switchLanguage);
 
         // Save State in Shared Preferences
-        SharedPreferences sharedPreferences = getSharedPreferences("save", MODE_PRIVATE);
+        context = getApplication();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("save", context.MODE_PRIVATE);
         aSwitch.setChecked(sharedPreferences.getBoolean("value", false));
-        setLanguage(true);
-        try {
+        setLanguage(false);
+        aSwitch.setChecked(false);
+
             aSwitch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,16 +73,13 @@ public class MainActivity extends AppCompatActivity {
                         setLanguage(true);
                     } else {
                         SharedPreferences.Editor editor = getSharedPreferences("save", MODE_PRIVATE).edit();
-                        editor.putBoolean("value", true);
+                        editor.putBoolean("value", false);
                         editor.apply();
                         aSwitch.setChecked(false);
                         setLanguage(false);
                     }
                 }
             });
-        }
-        catch (Exception e) { }
-
 
         // morning azkar button
         try {

@@ -154,7 +154,6 @@
                     android:layout_marginStart="10dp"
                     android:background="@drawable/copy_button"
                     >
-
                 </Button>
 
             </LinearLayout>

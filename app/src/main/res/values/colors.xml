@@ -9,5 +9,8 @@
 
 
     <color name="colorButton">#206a5d</color>
+    <color name="colorStart">#36ED81</color>
+    <color name="colorEnd">#109F8D</color>
+    <color name="colorCenter">#26C986</color>
 
 </resources>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.me_azkar"
+        applicationId "com.is360.me_azkar"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

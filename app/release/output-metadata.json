@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.me_azkar",
+  "applicationId": "com.is360.me_azkar",
   "variantName": "processReleaseResources",
   "elements": [
     {

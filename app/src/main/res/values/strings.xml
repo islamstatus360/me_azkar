@@ -3,4 +3,13 @@
     <string name="app_tagline">Morning &amp; Evening Supplications</string>
     <string name="app_developer">Farhan Ellahi</string>
     <string name="app_organization">Islam Status 360</string>
+
+
+    <string name="app_morning_title">Morning</string>
+    <string name="app_evening_title">Evening</string>
+    <string name="app_about_us_title">About Us</string>
+    <string name="app_about_us"><b>ME AZKAR</b> has been made easy to read Azkar by dividing it into Morning Evening categories, and at the same time English-Urdu translation has also been added to understand the meaning of supplication in your language.</string>
+    <string name="app_mail">islamstatus360@gmail.com</string>
+    <string name="app_wa_number">+92-(310)-616-2624</string>
+
 </resources>

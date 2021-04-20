@@ -45,6 +45,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
 
     @Override
     public void onBindViewHolder( final Adapter.viewHolder holder, final int position) {
+
         holder.supplication_id.setText(arrayList.get(position).getSupplication_id());
         holder.supplication_repeat.setText("Recite: " + arrayList.get(position).getSupplication_repeat() + " time[s]");
         holder.supplication.setText(arrayList.get(position).getSupplication());
@@ -63,13 +64,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
         holder.shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    shareIntent(position);
-                }
-                catch (Exception e)
-                {
-                    Toast.makeText(context, "Error: In this time this feature is not supported in your mobile", Toast.LENGTH_LONG).show();
-                }
+                shareIntent();
             }
         });
 
@@ -102,12 +97,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
         return arrayList.size();
     }
 
-    public void shareIntent(final int position) {
+
+    public void shareIntent() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_SUBJECT, "ME AZKAR");
         intent.putExtra(Intent.EXTRA_TEXT, getDisplayData());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setType("text/plain");
-        context.startActivity(Intent.createChooser(intent, "Share To"));
+        try {
+            context.startActivity(Intent.createChooser(intent, "Share To..."));
+        }
+        catch (Exception e) {
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public void whatsappShareIntent(final int position) {

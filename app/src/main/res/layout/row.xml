@@ -23,9 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 >
-
                 <TextView
                     android:id="@+id/supplication_repeat_no"
                     android:layout_width="wrap_content"
@@ -65,7 +63,8 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
+                    android:textIsSelectable="true"
                     android:textStyle="bold"
                     >
 
@@ -76,9 +75,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="3dp"
-                    android:fontFamily="@font/al_qalam_quran_majeeed"
+                    android:textIsSelectable="true"
+                    android:fontFamily="@font/al_qalam_quran_majeed"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     >
 
@@ -89,7 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
+                    android:textIsSelectable="true"
                     android:padding="3dp"
                     android:textStyle="bold">
                 </TextView>
@@ -115,6 +116,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
                     android:textSize="14sp"
+                    android:textIsSelectable="true"
                     android:padding="3dp"
                     android:textStyle="bold"
                     >
@@ -122,9 +124,16 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:rowCount="1"
+                android:columnCount="2"
+                >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 >
 
                 <Button
@@ -157,6 +166,8 @@
                 </Button>
 
             </LinearLayout>
+
+            </GridLayout>
 
         </LinearLayout>
     </RelativeLayout>

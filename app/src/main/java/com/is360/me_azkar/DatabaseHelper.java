@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     String book_name_language = "";
     String hadith_no_language = "";
 
-    // declare varible and store database basic information
+    // declare variable and store database basic information
     public static final String DATABASE_NAME =  "morning_evening_supplications_data.db";
     public static final String DB_PATH_SUFFIX = "/databases/";
 
@@ -32,14 +32,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     static Context context;
     private static DatabaseHelper instance;
+    private static final int DATABASE_VERSION = 2;
     // constructor
     public DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) { }
+    public void onCreate(SQLiteDatabase db) {
+    }
 
     public void CopyDataBaseFromAsset() throws IOException {
         InputStream open = context.getAssets().open(DATABASE_NAME);
@@ -87,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.w(DatabaseHelper.class.getName(), "Data base is upgraded  ");
+        Log.w(DatabaseHelper.class.getName(), "Database is upgraded");
     }
 
     public void refresh() {
@@ -118,7 +120,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "ON sd.supplication_morning_evening_id = sme.supplication_morning_evening_id\n" +
                 "JOIN supplication_reference as sr\n" +
                 "ON sd.supplication_reference_id = sr.supplication_reference_id\n" +
-                "WHERE sme." + data + " = 1", null);
+                "WHERE sme." + data + " = 1\n" +
+                "ORDER BY sd.supplication_order", null);
 
         if (cursor.moveToFirst()) {
             int i = 1;

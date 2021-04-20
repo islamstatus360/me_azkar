@@ -6,58 +6,279 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_main_scene"
     android:background="@drawable/background"
-    android:gravity="center_vertical"
-    android:layout_gravity="center_horizontal"
-    android:id="@+id/MainLayout"
     tools:context=".MainActivity">
 
-
-        <LinearLayout
-            android:id="@+id/Buttonlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
-            android:weightSum="2"
-            android:layout_marginStart="2dp"
-            >
-
-            <Button
-                android:id="@+id/btnMorning"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corner"
-                android:layout_margin="5dp"
-                android:text="Morning"
-                android:textColor="@color/colorWhite"
-                android:textSize="30sp" />
-
-            <Button
-                android:id="@+id/btnEvening"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/rounded_corner"
-                android:text="Evening"
-                android:textColor="@color/colorWhite"
-                android:textSize="30sp" />
-        </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/SwithLayout"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/app_tagline"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/Buttonlayout"
+        android:layout_gravity="fill"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardElevation="15dp"
         >
 
-        <Switch
-            android:id="@+id/switchLanguage"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="English" />
-    </LinearLayout>
+            android:text="@string/app_tagline"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:gravity="center"
+            android:padding="40dp"
+            android:lineSpacingExtra="10dp"
+            android:textSize="30sp"
+            ></TextView>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_tagline"
+        >
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_tagline"
+            android:rowCount="3"
+            android:columnCount="2"
+            android:layout_margin="20dp"
+            >
+
+            <!--    First Row   -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnMorning"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="fill"
+                    android:padding="20dp"
+                    android:layout_gravity="center_vertical|center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:src="@drawable/sunrise_52px"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_morning_title"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnEvening"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:layout_gravity="center_vertical|center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:src="@drawable/sunset_52px"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_evening_title"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--    Second Row    -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/switchLangCard"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:layout_gravity="center_vertical|center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:src="@drawable/geography_52px"/>
+
+                    <Switch
+                        android:id="@+id/switchLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="Urdu" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--    Third Row    -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardShareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_rowWeight="1"
+                android:layout_column="1"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:src="@drawable/share_52px" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Share App"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardMoreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:layout_gravity="center_vertical|center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:src="@drawable/more_52px"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="More Apps"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAboutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:layout_gravity="center_vertical|center_horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:src="@drawable/info_104px"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

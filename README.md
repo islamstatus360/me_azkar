@@ -38,4 +38,3 @@
 ![ME_AZKAR_APP_SCREENSHOT](app_assets_for_playstore/screenshots/screenshot_4.png)
 ![ME_AZKAR_APP_SCREENSHOT](app_assets_for_playstore/screenshots/screenshot_5.png)
 ![ME_AZKAR_APP_SCREENSHOT](app_assets_for_playstore/screenshots/screenshot_5.png)
-![ME_AZKAR_APP_SCREENSHOT](app_assets_for_playstore/screenshots/screenshot_6.png)

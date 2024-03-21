@@ -1,15 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
-
+    compileSdkVersion 34
+    namespace 'com.is360.me_azkar'
     defaultConfig {
         applicationId "com.is360.me_azkar"
-        minSdkVersion 14
-        targetSdkVersion 30
-        versionCode 2
-        versionName "1.1"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -26,8 +26,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
     Activity activity;
     ArrayList<Model> arrayList;
     DatabaseHelper databaseHelper;
-    final int position = 0;
-
     Boolean language = MainActivity.getLanguage();
 
     public Adapter(Context context, Activity activity, ArrayList<Model> arrayList) {
@@ -64,7 +62,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
         holder.shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                shareIntent();
+                shareIntent(position);
             }
         });
 
@@ -83,7 +81,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
             @Override
             public void onClick(View v) {
                 ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("label", getDisplayData());
+                ClipData clip = ClipData.newPlainText("label", getDisplayData(position));
                 clipboard.setPrimaryClip(clip);
             }
         });
@@ -95,10 +93,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
     }
 
 
-    public void shareIntent() {
+    public void shareIntent(int position) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_SUBJECT, "ME AZKAR");
-        intent.putExtra(Intent.EXTRA_TEXT, getDisplayData());
+        intent.putExtra(Intent.EXTRA_TEXT, getDisplayData(position));
         intent.setType("text/plain");
         try {
             activity.startActivity(Intent.createChooser(intent, "Share To..."));
@@ -110,13 +108,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewHolder> {
 
     public void whatsappShareIntent(final int position) {
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_TEXT, getDisplayData());
+        intent.putExtra(Intent.EXTRA_TEXT, getDisplayData(position));
         intent.setType("text/plain");
         intent.setPackage("com.whatsapp");
         activity.startActivity(Intent.createChooser(intent, "Share To ..."));
     }
 
-    public String getDisplayData() {
+    public String getDisplayData(int position) {
 
         Model model = arrayList.get(position);
         if (language) {

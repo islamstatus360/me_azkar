@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     Context context;
     private static String supplication;
-    private static Boolean language;
+    private static Boolean language = true;
     Switch aSwitch;
     CardView btnMorning, btnEvening, cardLanguageButton, cardShareButton, cardMoreButton, cardAboutButton;
 
